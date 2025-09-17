@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-TRF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="startScreen">
+            <h1>Shadow Runner</h1>
+            <p>Press 'Space' or 'Tap' to Jump</p>
+            <button id="startButton">Start Game</button>
+        </div>
+        <div id="gameOverScreen" class="hidden">
+            <h1>Game Over</h1>
+            <p>Your Score: <span id="finalScore">0</span></p>
+            <button id="restartButton">Restart</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
