@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-TRF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Runner</title>
+    <title>The Echo in the Gloom</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <canvas id="gameCanvas"></canvas>
-        <div id="startScreen">
-            <h1>Shadow Runner</h1>
-            <p>Press 'Space' or 'Tap' to Jump</p>
-            <button id="startButton">Start Game</button>
+
+    <div id="game-container">
+        <div id="background">
+            <div class="trigger" data-text="Where... am I? A forest of thorns and silence." style="left: 100px;"></div>
+            <div class="trigger" data-text="Ahead... a flicker. A memory of light. I must follow." style="left: 800px;"></div>
+            <div class="trigger" data-text="The ground crumbles away. The world is broken here." style="left: 2200px;"></div>
+            <div class="trigger" data-text="These ruins... they almost feel familiar. A city of ghosts." style="left: 3500px;"></div>
+            <div class="trigger" data-text="The light is brighter now. It waits. It feels... lonely." style="left: 4800px;"></div>
+            <div class="trigger" data-text="It's not a memory. It's an echo. My echo." style="left: 6200px;"></div>
+            <div class="trigger" data-text="We are one again. The silence is... peaceful. For now." style="left: 7800px;"></div>
         </div>
-        <div id="gameOverScreen" class="hidden">
-            <h1>Game Over</h1>
-            <p>Your Score: <span id="finalScore">0</span></p>
-            <button id="restartButton">Restart</button>
-        </div>
+        <div id="player"></div>
+        <div id="vignette"></div>
     </div>
+
+    <div id="story-overlay">
+        <p id="story-text">Use Left & Right Arrow Keys to move.</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

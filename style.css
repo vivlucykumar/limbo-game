@@ -1,67 +1,80 @@
 body {
     margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     background-color: #111;
-    color: #fff;
+    color: white;
     font-family: 'Courier New', Courier, monospace;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
 }
 
-.game-container {
-    position: relative;
-    border: 2px solid #555;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+#background {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 8000px; /* This is the total width of our world */
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 5%, transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.03) 5%, transparent 25%),
+        linear-gradient(to top, #000000 0%, #1a1a1a 40%, #2c2c2c 100%);
+    transition: transform 0.1s linear;
+    z-index: 1;
 }
 
-canvas {
-    display: block;
-    background: linear-gradient(to bottom, #1a1a1a, #333333);
-    filter: grayscale(1) contrast(1.5) brightness(0.8);
+#player {
+    position: absolute;
+    bottom: 10%; /* Player stands on a virtual ground */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 80px;
+    background-color: #000;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.7);
+    z-index: 10;
 }
 
-#startScreen, #gameOverScreen {
+#vignette {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    box-shadow: inset 0 0 200px rgba(0,0,0,0.9);
+    z-index: 20;
+    pointer-events: none; /* Allows clicking through it */
+}
+
+#story-overlay {
+    position: fixed;
+    bottom: 15%;
+    width: 100%;
     text-align: center;
+    z-index: 30;
+    pointer-events: none;
 }
 
-h1 {
-    font-size: 3em;
-    text-shadow: 2px 2px 5px #000;
-}
-
-p {
-    font-size: 1.2em;
-    margin-top: -10px;
-}
-
-button {
+#story-text {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ccc;
     padding: 10px 20px;
+    border-radius: 5px;
     font-size: 1.2em;
-    background-color: #333;
-    color: #fff;
-    border: 2px solid #555;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+    max-width: 80%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-button:hover {
-    background-color: #fff;
-    color: #000;
-}
-
-.hidden {
-    display: none;
+/* For our invisible triggers */
+.trigger {
+    position: absolute;
+    width: 50px;
+    height: 200px;
+    bottom: 10%;
 }
