@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startScreen = document.getElementById('start-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
     const gameContainer = document.getElementById('game-container');
-    const player = document.getElementById('player');
+    const carPlayer = document.getElementById('car-player'); // Changed to carPlayer
     const scoreDisplay = document.getElementById('score-display');
     const finalScoreDisplay = document.getElementById('final-score');
     const startButton = document.getElementById('start-button');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isGameOver = false;
         score = 0;
         playerPosition = 50;
-        player.style.left = '50%';
+        carPlayer.style.left = '50%'; // Use carPlayer
         scoreDisplay.textContent = 0;
 
         // 2. Clear any old game elements
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameContainer.classList.remove('hidden');
 
         // 4. Start the game loops
-        hazardSpawnerInterval = setInterval(spawnHazard, 800);
+        hazardSpawnerInterval = setInterval(spawnHazard, 800); // Hazards spawn every 0.8 seconds
         gameLoop();
     }
 
@@ -69,31 +69,51 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keys.ArrowRight && playerPosition < 98) {
             playerPosition += playerSpeed;
         }
-        player.style.left = `${playerPosition}%`;
+        carPlayer.style.left = `${playerPosition}%`; // Use carPlayer
 
         // Move hazards and check for collisions
         moveHazards();
-        
-        // Update score
+
+        // Update score - every frame means fast scoring, adjust if needed
         score++;
         scoreDisplay.textContent = score;
 
         gameLoopInterval = requestAnimationFrame(gameLoop);
     }
 
+    // Function to get a random vibrant color
+    function getRandomColor() {
+        const colors = [
+            '#FF6347', // Tomato
+            '#FFD700', // Gold
+            '#6A5ACD', // SlateBlue
+            '#3CB371', // MediumSeaGreen
+            '#FF69B4', // HotPink
+            '#1E90FF', // DodgerBlue
+            '#BA55D3'  // MediumPurple
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
     function spawnHazard() {
         const hazard = document.createElement('div');
         hazard.classList.add('hazard');
         hazard.style.left = `${Math.random() * 95}%`; // Random horizontal position
+        hazard.style.backgroundColor = getRandomColor(); // Set random color
+
+        // Optional: Add random shapes
+        // const shapes = ['square', 'circle'];
+        // hazard.classList.add(shapes[Math.floor(Math.random() * shapes.length)]);
+
         gameContainer.appendChild(hazard);
     }
 
     function moveHazards() {
-        const playerRect = player.getBoundingClientRect();
+        const playerRect = carPlayer.getBoundingClientRect(); // Use carPlayer
 
         document.querySelectorAll('.hazard').forEach(hazard => {
             const currentTop = parseFloat(hazard.style.top || -50);
-            hazard.style.top = `${currentTop + 5}px`;
+            hazard.style.top = `${currentTop + 5}px`; // Hazards fall faster
 
             // Remove hazard if it goes off-screen
             if (currentTop > window.innerHeight) {
